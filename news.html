@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmers News</title>
+  
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      margin-top: 80px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 30px;
+      color: #2e8b57;
+    }
+
+    .news-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .filter-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 8px 16px;
+      font-size: 16px;
+      border: 2px solid #2e8b57;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:hover {
+      background-color: #2e8b57;
+      color: #fff;
+    }
+
+    .news-item {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .news-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .news-item h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #2e8b57;
+    }
+
+    .news-item p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .news-item a {
+      font-size: 1rem;
+      color: #2e8b57;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .news-item a:hover {
+      text-decoration: underline;
+    }
+
+    .news-item .date {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .no-news-message {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #999;
+      margin-top: 50px;
+    }
+
+  </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav id="navbar" class="navbar"></nav>
+<!---nav-end-->
+  <div class="news-container">
+    <h2>Latest News for Farmers</h2>
+    
+    <!-- Category Filter -->
+    <div class="filter-container">
+      <label for="category" style="font-size: 1.2rem;">Filter by Category:</label>
+      <select id="category" onchange="fetchNewsByCategory()">
+        <option value="">All</option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Government">Government</option>
+        <option value="Market">Market</option>
+      </select>
+    </div>
+
+    <!-- News Items -->
+    <div id="news-list"></div>
+    <p id="no-news" class="no-news-message" style="display: none;">No news available at the moment. Please check back later.</p>
+  </div>
+ 
+  <script>
+    function fetchNews() {
+      fetch('/api/news')
+        .then(response => response.json())
+        .then(data => {
+          console.log("Fetched News:", data);  // Check the data in the console
+          if (data.length > 0) {
+            displayNews(data);
+          } else {
+            document.getElementById('no-news').style.display = 'block';
+          }
+        })
+        .catch(error => console.error('Error fetching news:', error));
+    }
+  
+    function fetchNewsByCategory() {
+      const category = document.getElementById('category').value;
+      let url = '/api/news';
+  
+      if (category) {
+        url = /api/news/category/${category};
+      }
+  
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log("Fetched News by Category:", data);
+          if (data.length > 0) {
+            displayNews(data);
+          } else {
+            document.getElementById('no-news').style.display = 'block';
+          }
+        })
+        .catch(error => console.error('Error fetching news by category:', error));
+    }
+  
+    function displayNews(news) {
+      const newsContainer = document.getElementById('news-container');
+      newsContainer.innerHTML = ''; // Clear any existing news
+      document.getElementById('no-news').style.display = 'none'; // Hide 'no news' message
+  
+      news.forEach(item => {
+        const articleElement = document.createElement('div');
+        articleElement.classList.add('news-item');
+  
+        const description = item.description ? item.description : 'No description available';
+        
+        articleElement.innerHTML = `
+          <h3>${item.title}</h3>
+          <p>${description}</p>
+          ${item.url ? <a href="${item.url}" target="_blank">Read more</a> : ''}
+          <p class="date"><small>${new Date(item.publishedAt).toLocaleString()}</small></p>
+          ${item.urlToImage ? <img src="${item.urlToImage}" alt="News Image" /> : ''}
+        `;
+  
+        newsContainer.appendChild(articleElement);
+      });
+    }
+  
+    window.onload = fetchNews;
+  </script>
+  <!--footer starts from here-->
+  <nav id="footer" class="footer"></nav>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendors/jquery/jquery.min.js"></script>
+      <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="script.js"></script> 
+</body>
+</html>

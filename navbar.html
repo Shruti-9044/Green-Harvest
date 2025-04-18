@@ -1,0 +1,83 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+  <div class="container">
+     <a class="navbar-brand" href="index.html">
+     <img src="images/logo.jpg" alt="logo" />
+     </a>
+     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fas fa-bars"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+           <a class="nav-link" href="signup.html">signup</a>
+         </li>
+          
+         <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Products available
+           </a>
+           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+              <a class="dropdown-item" href="portfolio-1-col.html">Vegetables</a>
+              <a class="dropdown-item" href="portfolio-2-col.html">Fruits</a>
+              <a class="dropdown-item" href="portfolio-3-col.html">Cereal grains</a>
+              <a class="dropdown-item" href="portfolio-4-col.html">Agricultural tools</a>
+              <a class="dropdown-item" href="portfolio-item.html">Seeds</a>
+              <a class="dropdown-item" href="portfolio-5.html">Fertilizers</a>
+           </div>
+         </li>
+         <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Login
+           </a>
+           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+              <a class="dropdown-item" href="Userlogin.html">User Add info</a>
+              <a class="dropdown-item" href="Adminlogin.html">Admin Add info</a>
+
+           </div>
+         </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Blog
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+        <a class="dropdown-item" href="blog-home-2.html">Blog Home</a>
+              <a class="dropdown-item" href="blog-post.html">Blog Post</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Pages
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+              <a class="dropdown-item" href="faq.html">FAQ</a>
+              <a class="dropdown-item" href="review.html">Review</a>
+              <a class="dropdown-item" href="pricing.html">Pricing Table</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+           <a class="nav-link" href="weather.html">Weather</a>
+         </li>
+        </ul>
+     </div>
+  </div>
+</nav>
+
+   
+<script>
+   const li = document.querySelectorAll('.menu li')[0]
+   li.addEventListener('click', (e)=>{
+       e.preventDefault()
+       alert('Home Clicked')
+       window.location.href='/index.html'
+   })
+</script>

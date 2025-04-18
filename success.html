@@ -1,0 +1,93 @@
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AgriProducts </title>
+    <link rel="icon" href="fav.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <!-- Custom styles for this template -->
+    <!-- Fontawesome CSS -->
+
+    <link href="css/all.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/ss.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+  </head>
+
+  <body class="text-center">
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar"></nav>
+
+    <div class="full-title">
+      <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+
+        </h1>
+      </div>
+    </div>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Successful</h1>
+        <p class="lead">Welcome to Green Harvest!!. </p>
+        
+      </div>
+    </div>
+
+  <!---footer-->
+	<nav id="footer" class="footer"></nav>
+    <!-- Bootstrap core JavaScript -->
+
+    <script src="vendors/jquery/jquery.min.js"></script>
+    <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="login.js" defer></script>
+    <script defer src="js/sign.js"></script>
+    <script src="script.js"></script>
+    <!-- Our Customers -->
+    <script>
+      async function loginUser(event) {
+        event.preventDefault();
+    
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+    
+        try {
+          const response = await fetch("http://localhost:5000/api/users/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+    
+          const result = await response.json();
+          console.log("Login response:", result);
+    
+          if (response.ok) {
+            // Optionally store user in localStorage
+            localStorage.setItem("user", JSON.stringify(result.user));
+            // Redirect on successful login
+            window.location.href = "success.html";
+          } else {
+            alert(result.message || "Login failed. Please try again.");
+          }
+        } catch (error) {
+          console.error("Login error:", error);
+          alert("An error occurred. Please try again later.");
+        }
+      }
+    </script>
+
+  </body>
+  </html>
